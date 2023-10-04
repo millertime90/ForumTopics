@@ -1,0 +1,54 @@
+html, body { min-height: 100vh; } 
+
+body { margin: 0; } 
+
+.header {
+	background-color: rgb(43, 44, 235); 
+} 
+
+.logoImg { border-radius: 10px; } 
+
+.profile {
+	padding: 1rem; 
+	border-radius: 50%; 
+	background-color: rgb(247, 248, 249); 
+} 
+
+.notifs, .profile { cursor: pointer; } 
+
+.header-input::placeholder { font-size: 10px; } 
+
+.fa-bell, fa-comment { position: relative; }
+
+.notifsIndicator {
+	display: inline-block; 
+	width: 15px; 
+	height: 15px; 
+	background-color: red; 
+	border-radius: 50%; 
+	position: absolute; 
+} 
+
+.cta { 
+	color: rgb(247, 248, 249); 
+	cursor: pointer; 
+	text-decoration: none; 
+} 
+
+.formModal { display: none; } 
+.registerSuccess { display: none; } 
+
+#registerSuccessModal .modal-header {
+        background-color: #4CAF50; /* A green shade for success */
+        color: white;
+}
+
+#registerSuccessModal .btn-primary {
+    background-color: #4CAF50; /* A green shade for success */
+    border-color: #4CAF50;
+}
+
+#registerSuccessModal .btn-primary:hover,
+#registerSuccessModal .btn-primary:focus {
+    background-color: #45a049; /* A darker green shade for hover/focus */
+}

@@ -1,0 +1,60 @@
+/* 	myprofile CSS 	*/ 
+
+body {
+	font-family: Arial, sans-serif; 
+	background-color: rgb(43, 44, 235); 
+	color: white; 
+} 
+
+.navbar { background-color: rgba(0, 0, 0, 0.6); } 
+
+.profile-wrapper {
+	background-color: rgba(0, 0, 0, 0.6); 
+	padding: 20px; 
+	border-radius: 8px; 
+	margin-bottom: 20px; 
+} 
+
+.image-gallery {
+	max-height: 50vh; 
+	overflow-y: auto; 
+	overflow-x: hidden; 
+	background-color: rgba(255, 255, 255, 0.2); 
+	padding: 10px; 
+	border-radius: 8px; 
+	box-sizing: border-box; 
+	scrollbar-width: thin; 
+	scrollbar-color: rgba(43, 44, 235, 0.75); 
+} 
+
+/* Styles for Webkit browsers like chrome, Safari */ 
+.image-gallery::-webkit-scrollbar,
+body::-webkit-scrollbar
+{ width: 5px; } 
+
+.image-gallery::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb
+{
+	background-color: rgba(43, 44, 235, 0.75); 
+	border-radius: 2px; 
+} 
+
+.image-gallery::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track
+{ background-color: #f1f1f1; } 
+
+.image-gallery img {
+	border-radius: 8px; 
+	transition: transform .2s; 							/* Optional: for a slight scale on hover */ 
+	cursor: pointer; 
+} 
+
+.image-gallery img:hover { transform: scale(1.05); } 	/* Optional: for a slight zoom on hover */ 
+
+.footer {
+	background-color: rgba(0, 0, 0, 0.8); 
+	position: sticky; 
+	bottom: 0; 
+	left: 0; 
+	width: 100%; 
+} 

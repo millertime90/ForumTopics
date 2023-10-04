@@ -1,0 +1,348 @@
+<!DOCTYPE html> 
+<html lang="en-US">
+	<head>
+		<title>Forum Topics</title> 
+		<meta charset="UTF-8" /> 
+		<meta http-equiv="X-UA-Compatible" content="IE-edge" /> 
+		<meta name="viewport" 
+			  content="width=device-width, initial-scale=1.0" 
+		/> 
+		<meta name="_csrf" th:content="${_csrf.token}" /> 
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" /> 
+		<link rel="stylesheet" href="/framework/bootstrap/bootstrap-5.0.2-dist/css/bootstrap.css" /> 
+		<link rel="stylesheet" href="/framework/fontawesome/css/all.min.css" /> 
+		<link rel="stylesheet" href="/framework/fontawesome/css/fontawesome.min.css" />
+		<link rel="stylesheet" href="/css/main.css" /> 
+		<link rel="shortcut icon" type="image/png" sizes="16x16" th:href="@{/favicon-16x16.png}" /> 
+		<style type="text/css">
+			
+			.red { color: red; } 
+			.green { color: green; } 
+			
+		</style>
+	</head> 
+	
+	<body>
+		<div class="container-fluid header pageComponent">
+			<div class="row">
+				<div class="col-6 g-1 my-1">
+					<a class="logo" href="/index">
+						<img class="img-fluid logoImg" src="/img/FTlogo.png" />
+					</a>
+				</div>
+				<div class="col-6 d-flex justify-content-between align-items-center">
+					<a class="notifs notifsMessage">
+						<i class="fa-regular fa-comment fa-2xl p-1">
+							<span class="notifsIndicator"></span>
+						</i>
+					</a>
+					<a class="notifs notifsOther">
+						<i class="fa-regular fa-bell fa-2xl p-1">
+							<span class="notifsIndicator"></span>
+						</i> 
+					</a>
+					<a class="profile">
+						<i class="fa-regular fa-user fa-xl"></i>
+					</a>
+				</div> 
+			</div> 
+			<div class="row my-2 pb-2">
+				<div class="col-6 d-flex algin-items-center">
+					<div class="input-group">
+						<input class="form-control header-input" type="text" placeholder="Search Forum Topics" />
+						<button type="button" class="btn btn-outline-secondary">
+							<i class="fas fa-search fa-lg"></i>
+						</button>
+					</div>
+				</div>
+				<div class="col-6 d-flex justify-content-end">
+					<a class="p-1 cta formOpen signupForm">Sign-Up</a> 
+					<a class="p-1 cta formOpen loginForm">Login</a> 
+				</div>
+			</div>
+		</div>
+		<div id="loginForm" class="container-md m-2-md mt-4 formModal">
+		    <div class="row">
+			    <div class="col">
+      				<form id="log_in" 
+      					  class="border p-3"
+      					  action="/login" 
+      					  method="post"
+      				>
+						<div class="d-flex justify-content-end">
+          					<button type="button" 
+          							class="btn-close formClose loginForm" 
+          							aria-label="Close"
+          					></button> 
+        				</div>
+        				<fieldset class="input-group d-flex flex-column"> 
+          					<legend>Log into Forum Topics</legend>
+          					<label>
+            					Username:
+            					<input class="form-control header-input" 
+                   					   name="loginForm_username" 
+                             		   type="text" 
+                   					   placeholder="Enter username" 
+                   					   required 
+            					/> 
+          					</label> 
+          					<label>
+            					Password:
+       							<input class="form-control header-input" 
+               						   name="login_password" 
+               						   type="password" 
+               						   required 
+            					/> 
+          					</label>
+          					<button id="login_btn" 
+          							class="btn btn-success mt-4" 
+          							type="submit"
+          					>
+          						Login
+          					</button> 
+          					<button class="btn formClose loginForm btn-danger mt-4 mb-4" type="button">Cancel</button> 
+          					Forgot Username or password? 
+          					<a id="openUsernamePasswordResetModal" style="color:lightblue;cursor:pointer;">Click here</a>
+        				</fieldset>
+        				<p class="text-center">
+          					or<br />
+          					Login with
+        				</p> 
+        				<div class="d-flex flex-row justify-content-center mt-2"> 
+          					<button class="btn" 
+                  					type="button"
+                  					style="color:red;"
+          					>
+            					<i class="fab fa-google p-1 loginOps"></i> 
+          					</button> 
+          					<button class="btn" 
+                  					type="button"
+                  					style="color:purple;"
+          					>
+            					<i class="fab fa-yahoo p-1 loginOps"></i> 
+          					</button> 
+          					<button class="btn" 
+                  					type="button"
+                  					style="color:blue;"
+          					>
+            					<i class="fab fa-facebook p-1 loginOps"></i> 
+          					</button> 
+          					<button class="btn" 
+                  					type="button"
+                  					style="color:lightblue;"
+          					>
+            					<i class="fab fa-twitter p-1 loginOps"></i> 
+          					</button> 
+        				</div>
+        				<p class="text-center mt-2">
+          					Don't have an account? 
+          					<a id="loginForm_signupCTA" 
+          					   class="p-1 cta formOpen signupForm" 
+          					   style="color:lightblue;">Sign Up!
+          					</a> 
+        				</p> 
+      				</form> 
+    			</div>
+  			</div> 
+		</div> 
+		<div id="signupForm" class="container-md m-2-md mt-4 formModal">
+			<div class="row">
+				<div class="col">
+					<form id="signup"
+						  class="form border p-2 m-2"
+						  action="/register"
+						  method="post"
+					> 
+						<div class="d-flex justify-content-end">
+							<button class="btn-close formClose signupForm" 
+									type="button" 
+									aria-label="Close" 
+							></button>
+						</div> 
+						<fieldset>
+							<legend>Sign-Up</legend> 
+							<div class="input-group">
+								<div class="d-flex">
+									<label class="m-2">
+										First Name: 
+										<input class="form-control" 
+											   name="firstName" 
+											   type="text" 
+											   placeholder="First Name" 
+											   required 
+										/> 
+									</label> 
+									<label class="m-2">
+										Last Name: 
+										<input class="form-control" 
+											   name="lastName" 
+											   type="text" 
+											   placeholder="Last Name" 
+											   required 
+										/> 
+									</label> 
+								</div>
+								<div class="d-flex" style="margin-left:auto;">
+									<img class="img-fluid m-2" 
+									 	 src="/img/FTlogo.png" 
+									 	 alt="Logo" 
+									/> 
+								</div>
+							</div> 
+							<div class="input-group d-flex flex-column">
+								<label class="m-2">
+									Email Address: 
+									<input class="form-control" 
+										   name="email" 
+										   type="email" 
+										   placeholder="email" 
+										   required 
+									/>
+								</label> 
+								<label class="m-2"> 
+									Username: 
+									<input class="form-control" 
+										   name="username" 
+										   type="text" 
+										   placeholder="username" 
+										   required 
+									/> 
+								</label> 
+								<label class="m-2"> 
+									Password: 
+									<input id="password"
+										   class="form-control" 
+										   name="tentative_password" 
+										   type="password" 
+										   placeholder="password" 
+										   required 
+									/> 
+								</label> 
+								<label class="m-2">
+									Confirm password: <span id="confirmPasswordIndicator"></span>
+									<input id="confirmPassword" 
+										   class="form-control" 
+										   name="password_hash" 
+										   type="password" 
+										   placeholder="confirm password" 
+										   required 
+									/> 
+								</label>
+								<p id="password-requirements" class="m-2" style="font-size:14px;color:gray;">
+									<span class="requirement">*</span> Password must consist of at minimum 8 characters<br /> 
+									<span class="requirement">*</span> Password must consist of at least 1 special character (e.g. !, #, %, etc.)<br /> 
+									<span class="requirement">*</span> Password must consist of at least 1 numeric character 
+								</p> 
+								<div class="password-strength-indicator" style="visibility:hidden;">
+									<div class="progress">
+										<div id="strength-bar" 
+											 class="progress-bar" 
+											 role="progressbar" 
+										></div> 
+									</div> 
+									<small id="strength-text" class="form-text text-muted"></small>
+								</div> 
+								<button id="signup_btn" 
+										class="btn btn-primary m-2" 
+										type="submit"
+								>
+									Create Account
+								</button> 
+								<p class="m-2 text-center">
+									or create account with 
+								</p> 
+								<div class="d-flex flex-row justify-content-center m-2 p-2">
+									<button class="btn" type="button">
+										<i class="fab fa-google" style="color:red;"></i> 
+									</button> 
+									<button class="btn" type="button">
+										<i class="fab fa-yahoo" style="color:purple;"></i> 
+									</button> 
+									<button class="btn" type="button">
+										<i class="fab fa-facebook" style="color:blue;"></i> 
+									</button> 
+									<button class="btn" type="button">
+										<i class="fab fa-twitter" style="color:lightblue;"></i> 
+									</button>
+								</div> 
+								<button class="btn formClose signupForm btn-danger mt-4 mb-4" type="button">Cancel</button> 
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div> 
+		<div id="resetModal" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Forgot Username/Password?</h4> 
+						<button id="closeModalButton" 
+								class="close"
+								type="button" 
+								data-dismiss="modal" 
+						>
+							&times; 
+						</button> 
+					</div> 
+					<div class="modal-body">
+						<p>
+							Enter the email you have used to register for an account with Forum Topics, and an email with instructions will be 							sent to this email on about how to retrieve your username or reset your password. 
+						</p> 
+						<div class="form-group">
+							<label for="email">Email:</label> 
+							<input id="email" 
+								   class="form-control" 
+								   type="email"
+								   placeholder="Enter your registration email" 
+								   required 
+							/> 
+						</div>
+					</div> 
+					<div class="modal-footer">
+						<button id="sendEmailButton" 
+								class="btn btn-primary" 
+								type="button" 
+						>
+							Send Email 
+						</button> 
+						<button class="btn btn-danger" 
+								type="button" 
+								data-dismiss="modal" 
+						>
+							Close 
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" 
+			 id="registerSuccessModal" 
+			 tabindex="-1" 
+			 role="dialog" 
+			 aria-labelledby="registerSuccessModalLabel" 
+			 aria-hidden="true"
+		>
+    		<div class="modal-dialog modal-dialog-centered">
+        		<div class="modal-content">
+            		<div class="modal-header">
+                		<h5 class="modal-title" id="registerSuccessModalLabel">Success!</h5>
+            		</div>
+            		<div class="modal-body">
+                		New account registration successful!<br /> 
+                		Hit "Login" below to login 
+            		</div>
+            		<div class="modal-footer">
+                		<a href="#" id="toLogin" class="btn btn-primary">Login</a> 
+            		</div>
+        		</div>
+    		</div>
+		</div>
+		<script src="/js/lib/jquery3_7_0.js"></script> 
+		<script src="/framework/bootstrap/bootstrap-5.0.2-dist/js/bootstrap.js"></script> 
+		<script type="text/javascript" src="/js/main.js"></script> 
+		<script type="text/javascript" src="/js/passwordRequirementsValidation.js"></script> 
+		<script type="text/javascript" src="/js/userRegistration.js"></script> 
+		<script type="text/javascript" src="/js/userLogin.js"></script> 
+	</body>
+</html>
