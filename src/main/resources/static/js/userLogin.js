@@ -40,8 +40,8 @@ $(document).ready(function() {
 			}, 
 			error: function(xhr, status, error) {
 				
-				console.error("Server error: ", error); 
-				alert("An error incurred. Please try again."); 
+				 let jsonResponse = JSON.parse(xhr.responseText); 
+				 alert(jsonResponse.message); 
 				
 			} 
 			
@@ -55,7 +55,7 @@ $(document).ready(function() {
 		
 	}); 
 	
-	$("closeModalButton").click(function() {
+	$(".closeModalButton").click(function() {
 		
 		$("#resetModal").modal("hide"); 
 		
